@@ -1,11 +1,6 @@
-local function read_file(path)
-    local f = assert(io.open(path, "rb"))
-    local r = assert(f:read("*all"))
-    f:close()
-    return r
-end
+local util = require "util"
 
-local s = read_file(arg[1]):gsub("[^%d]", "")
+local s = util.read_file(arg[1]):gsub("[^%d]", "")
 
 local n, l = 0, #s
 assert(l % 2 == 0)
