@@ -11,7 +11,7 @@ end
 local p = (2 * ring + 1) ^ 2 - ring -- bottom center
 
 local m = math.huge
-for i = 1, 4 do
+for _ = 1, 4 do
     local n = math.abs(p - input)
     if n < m then m = n end
     p = p - 2 * ring
