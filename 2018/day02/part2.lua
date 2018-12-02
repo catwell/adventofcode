@@ -2,20 +2,20 @@ local util = require "util"
 
 local lines = util.read_lines(arg[1])
 
-local len, subs = #lines[1], {}
-for i = 1, len do subs[i] = {} end
+local len = #lines[1]
 
 local function str_minus(s, i)
     return s:sub(1, i-1) .. s:sub(i+1, len)
 end
 
-for _, l in ipairs(lines) do
-    for i = 1, len do
+for i = 1, len do
+    local subs = {}
+    for _, l in ipairs(lines) do
         local s = str_minus(l, i)
-        if subs[i][s] then
+        if subs[s] then
             print(s)
             return
         end
-        subs[i][s] = true
+        subs[s] = true
     end
 end
