@@ -1,3 +1,5 @@
+{-# LANGUAGE RecordWildCards #-} -- for {..}
+
 module Common where
 
 import System.Environment
@@ -40,7 +42,7 @@ lineParser = do
     w <- numberParser
     char 'x'
     h <- numberParser
-    return Line {identifier=identifier, x=x, y=y, w=w, h=h}
+    return Line {..}
 
 inputParser :: Parser [Line]
 inputParser = do
