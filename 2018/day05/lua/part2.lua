@@ -17,7 +17,6 @@ end
 
 local min_len = math.huge
 for c = string.byte("a"), string.byte("z") do
-    print(c)
     local t2 = filter(t, c)
     local l = common.react(t2)
     min_len = math.min(min_len, l)
