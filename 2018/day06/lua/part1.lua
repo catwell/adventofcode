@@ -2,7 +2,7 @@ local util = require "util"
 local common = require "common"
 
 local coords = common.parse_lines(util.read_lines(arg[1]))
-local grid, boundaries = {}, common.get_grid_bondaries(coords)
+local grid, boundaries = {}, common.get_grid_boundaries(coords)
 
 for i = boundaries.xmin, boundaries.xmax do
     grid[i] = {}

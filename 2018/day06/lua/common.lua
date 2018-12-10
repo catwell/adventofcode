@@ -9,7 +9,7 @@ function M.parse_lines(lines)
     return r
 end
 
-function M.get_grid_bondaries(coords)
+function M.get_grid_boundaries(coords)
     local r = {xmin = math.huge, xmax = 0, ymin = math.huge, ymax = 0}
     for _, l in ipairs(coords) do
         if l.x < r.xmin then r.xmin = l.x end

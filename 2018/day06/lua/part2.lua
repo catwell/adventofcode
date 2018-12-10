@@ -2,7 +2,7 @@ local util = require "util"
 local common = require "common"
 
 local coords = common.parse_lines(util.read_lines(arg[1]))
-local boundaries = common.get_grid_bondaries(coords)
+local boundaries = common.get_grid_boundaries(coords)
 
 local function distance(c, n)
     return math.abs(c.x - n.x) + math.abs(c.y - n.y)
