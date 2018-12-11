@@ -1,0 +1,89 @@
+local M, MM = {}, {}
+
+function M.new_game(players_count, last_marble)
+    local self = {
+        player = 1,
+        players_count = players_count,
+        last_marble = last_marble,
+        deque = {0, first = 1, last = 1},
+    }
+
+    local scores = {}
+    for i = 1, players_count do scores[i] = 0 end
+    self.scores = scores
+
+    return setmetatable(self, {__index = MM})
+end
+
+function MM.next_player(self)
+    local p = (self.player + 1) % self.players_count
+    self.player = (p == 0) and self.players_count or p
+end
+
+function MM.high_score(self)
+    local r = 0
+    for i = 1, self.players_count do
+        if self.scores[i] > r then
+            r = self.scores[i]
+        end
+    end
+    return r
+end
+
+function MM.push_front(self, v)
+    self.deque[self.deque.first - 1] = v
+    self.deque.first = self.deque.first - 1
+end
+
+function MM.push_back(self, v)
+    self.deque[self.deque.last + 1] = v
+    self.deque.last = self.deque.last + 1
+end
+
+function MM.pop_front(self)
+    self.deque.first = self.deque.first + 1
+    return self.deque[self.deque.first - 1]
+end
+
+function MM.pop_back(self)
+    self.deque.last = self.deque.last - 1
+    return self.deque[self.deque.last + 1]
+end
+
+function MM.rotate_counterclockwise(self, n)
+    for _ = 1, n do
+        self:push_back(self:pop_front())
+    end
+end
+
+function MM.rotate_clockwise(self, n)
+    for _ = 1, n do
+        self:push_front(self:pop_back())
+    end
+end
+
+function MM.play_normal(self, v)
+    local d = self.deque
+    self:rotate_counterclockwise(2)
+    self:push_front(v)
+    self:next_player()
+end
+
+function MM.play_special(self, v)
+    self:rotate_clockwise(6)
+    local v2 = self:pop_back()
+    self.scores[self.player] = self.scores[self.player] + v + v2
+    self:next_player()
+end
+
+function MM.play(self)
+    for i = 1, self.last_marble do
+        if i % 23 == 0 then
+            self:play_special(i)
+        else
+            self:play_normal(i)
+        end
+    end
+end
+
+return M
