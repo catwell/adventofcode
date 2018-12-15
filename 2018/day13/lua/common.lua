@@ -32,7 +32,6 @@ local function parse_line(state, y, l)
         p = p + 1
     end
     l:gsub(".", f)
-    return r
 end
 
 function M.parse_input(lines)
