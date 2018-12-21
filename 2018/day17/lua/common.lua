@@ -130,6 +130,28 @@ function M.repr(state)
     return table.concat(r, "\n")
 end
 
+function M.ppm_repr(state)
+    local r = {}
+    table.insert(r, "P3")
+    table.insert(r, string.format(
+        "%d %d 1",
+        state.xmax - state.xmin + 1,
+        state.ymax - state.ymin + 1
+    ))
+    local t = {
+        [" "] = "1 1 1",
+        ["#"] = "0 0 0",
+        ["~"] = "0 0 1",
+        ["|"] =  "1 0 0",
+    }
+    for y = state.ymin, state.ymax do
+        for x = state.xmin, state.xmax do
+            table.insert(r, t[state.map[y][x] or " "])
+        end
+    end
+    return table.concat(r, "\n")
+end
+
 function M.run(state)
     while #state.flowing_water > 0 do
         tick(state)
