@@ -39,7 +39,7 @@ function M.parse_integers(s, i0)
         t[p] = tonumber(x)
         p = p + 1
     end
-    s:gsub("%d+", f)
+    s:gsub("[-%d]+", f)
     return t
 end
 
