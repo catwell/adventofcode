@@ -1,5 +1,5 @@
 def input_file
-    File.new("input.txt", "r")
+    File.new('input.txt', 'r')
 end
 
 def input_integers
@@ -7,5 +7,5 @@ def input_integers
 end
 
 def input_integers_csv
-    input_file.read.chomp.split(",").map(&:to_i)
+    input_file.read.chomp.split(',').map(&:to_i)
 end
