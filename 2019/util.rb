@@ -9,3 +9,7 @@ end
 def input_integers_csv
     input_file.read.chomp.split(',').map(&:to_i)
 end
+
+def input_digits
+    input_file.read.chomp.split('').map(&:to_i)
+end
