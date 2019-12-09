@@ -22,6 +22,9 @@ Style/ParallelAssignment:
 Style/Documentation:
   Enabled: false
 
+Naming/UncommunicativeMethodParamName:
+  Enabled: false
+
 Metrics/PerceivedComplexity:
   Enabled: false
 
