@@ -19,6 +19,9 @@ Style/NumericLiterals:
 Style/ParallelAssignment:
   Enabled: false
 
+Style/Documentation:
+  Enabled: false
+
 Metrics/PerceivedComplexity:
   Enabled: false
 

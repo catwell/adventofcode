@@ -6,8 +6,9 @@ state = input_integers_csv
 def output_for(state, settings)
     v = 0
     settings.each do |s|
+        machine = Intcode.new(state)
         first = true
-        intcode_run(state) do |op, x|
+        machine.run do |op, x|
             if op == :i
                 r = first ? s : v
                 first = false
