@@ -37,3 +37,5 @@ Metrics/CyclomaticComplexity:
 Metrics/AbcSize:
   Enabled: false
 
+Metrics/ParameterLists:
+  Enabled: false
