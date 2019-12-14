@@ -39,3 +39,6 @@ Metrics/AbcSize:
 
 Metrics/ParameterLists:
   Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false

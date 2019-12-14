@@ -98,4 +98,3 @@ class Intcode
         _, did_io = run_one(&on_io) until did_io == :q
     end
 end
-
