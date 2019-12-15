@@ -7,6 +7,10 @@ class Intcode
         @relative_base = relative_base
     end
 
+    def dup
+        Intcode.new(tape.dup, pos: pos, relative_base: relative_base)
+    end
+
     def tape_at(pos)
         tape[pos] || 0
     end

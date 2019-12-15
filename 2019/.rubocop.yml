@@ -22,6 +22,9 @@ Style/ParallelAssignment:
 Style/Documentation:
   Enabled: false
 
+Style/GuardClause:
+  Enabled: false
+
 Naming/UncommunicativeMethodParamName:
   Enabled: false
 
