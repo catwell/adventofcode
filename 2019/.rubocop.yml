@@ -25,6 +25,12 @@ Style/Documentation:
 Style/GuardClause:
   Enabled: false
 
+Style/Next:
+  Enabled: false
+
+Style/ParenthesesAroundCondition:
+  Enabled: false
+
 Naming/UncommunicativeMethodParamName:
   Enabled: false
 
