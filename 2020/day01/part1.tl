@@ -1,4 +1,3 @@
-package.path = package.path .. ";../?.lua"
 local util = require "util"
 
 local input = util.read_file("input.txt")
@@ -11,10 +10,8 @@ end
 
 for i = 1, #t do
     for j = i + 1, #t do
-        for k = j + 1, #t do
-            if t[i] + t[j] + t[k] == 2020 then
-                print(t[i] * t[j] * t[k])
-            end
+        if t[i] + t[j] == 2020 then
+            print(t[i] * t[j])
         end
     end
 end

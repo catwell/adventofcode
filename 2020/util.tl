@@ -1,13 +1,13 @@
 local M = {}
 
-function M.read_file(path)
+function M.read_file(path: string) : string
     local f = assert(io.open(path, "rb"))
     local r = assert(f:read("a"))
     f:close()
     return r
 end
 
-function M.read_lines(path)
+function M.read_lines(path: string) : {string}
     local f = assert(io.open(path, "rb"))
     local r = {}
     while true do
@@ -19,7 +19,7 @@ function M.read_lines(path)
     return r
 end
 
-function M.copy_table(t)
+function M.copy_table<K,V>(t: {K:V}) : {K:V}
     local r = {}
     for k, v in pairs(t) do
         r[k] = v
@@ -27,15 +27,15 @@ function M.copy_table(t)
     return r
 end
 
-function M.count_keys(t)
+function M.count_keys(t : {any:any}) : number
     local c = 0
     for _ in pairs(t) do c = c + 1 end
     return c
 end
 
-function M.parse_integers(s, i0)
+function M.parse_integers(s: string, i0: number) : {number}
     local t, p = {}, i0
-    local function f(x)
+    local function f(x: string)
         t[p] = tonumber(x)
         p = p + 1
     end

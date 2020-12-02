@@ -1,9 +1,17 @@
-package.path = package.path .. ";../?.lua"
 local util = require "util"
 
-local M = {}
+local record LineData
+   min: number
+   max: number
+   letter: string
+   pwd: string
+end
 
-local function parse_line(line)
+local type ValidChecker = function(LineData): boolean
+
+local M = {LineData = LineData}
+
+local function parse_line(line: string) : LineData
     local ptrn = "(%d+)-(%d+) ([a-z]): ([a-z]+)"
     local min, max, letter, pwd = string.match(line, ptrn)
     return {
@@ -14,15 +22,15 @@ local function parse_line(line)
     }
 end
 
-local function parse_lines()
-    local lines = util.read_lines("input.txt")
+local function parse_lines() : {LineData}
+    local lines, r = util.read_lines("input.txt"), {}
     for i = 1, #lines do
-        lines[i] = parse_line(lines[i])
+        r[i] = parse_line(lines[i])
     end
-    return lines
+    return r
 end
 
-function M.count_valid(valid)
+function M.count_valid(valid: ValidChecker) : number
     local lines = parse_lines()
     local n = 0
     for i = 1, #lines do
