@@ -7,14 +7,13 @@
 
 ## How to run
 
-I use [localua](https://github.com/oploadk/localua) and a local version of `tl` so that I can fix bugs in it as I go if needed.
+I use [localua](https://github.com/oploadk/localua) and a local version of `tl` so that I can fix bugs in it as I go if needed (see `tl.sh`).
 
 ```sh
 tl_path="/path/to/tl"
 curl https://loadk.com/localua.sh -O
 sh localua.sh .lua
 ./.lua/bin/luarocks install tl --only-deps
-tl () { ../.lua/bin/lua "$tl_path" --include-dir .. --skip-compat53 "$@" ; }
 cd day01
-tl run part1.tl
+../tl.sh run part1.tl
 ```
