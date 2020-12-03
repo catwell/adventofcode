@@ -9,14 +9,12 @@
 
 I use [localua](https://github.com/oploadk/localua) and a local version of `tl` so that I can fix bugs in it as I go if needed.
 
-Setting `TL_PATH` is necessary to find the `util.tl`; setting `package.path` from inside a script won't work with Teal.
-
 ```sh
 tl_path="/path/to/tl"
 curl https://loadk.com/localua.sh -O
 sh localua.sh .lua
 ./.lua/bin/luarocks install tl --only-deps
-tl () { TL_PATH='./?.lua;../?.lua' ../.lua/bin/lua "$tl_path" "$@" ; }
+tl () { ../.lua/bin/lua "$tl_path" --include-dir .. --skip-compat53 "$@" ; }
 cd day01
 tl run part1.tl
 ```
