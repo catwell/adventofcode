@@ -43,4 +43,12 @@ function M.parse_integers(s: string, i0: number) : {number}
     return t
 end
 
+function M.map<A,B>(t: {A}, f: function(A):(B)): {B}
+    local r = {}
+    for i, v in ipairs(t) do
+        r[i] = f(v)
+    end
+    return r
+end
+
 return M
