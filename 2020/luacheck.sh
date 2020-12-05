@@ -7,7 +7,7 @@ path="$(dirname "$0")"
 check_one () {
     fn="$(mktemp "/tmp/XXXXXX-$(basename $1).lua")"
     "$path"/tl.sh gen --output "$fn" "$1" || die
-    luacheck --config "$path"/.luacheckrc "$fn"
+    luacheck --config "$path"/.luacheckrc --codes "$fn"
     rm "$fn"
 }
 
