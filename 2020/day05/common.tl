@@ -9,11 +9,9 @@ local function bin_lookup(left: number, right: number, stack: string): number
     end
     local head, tail = stack:sub(1,1), stack:sub(2)
     if head == "F" or head == "L" then
-        -- return bin_lookup(left, (left + right) // 2, tail)
-        return bin_lookup(left, math.floor((left + right) / 2), tail)
+        return bin_lookup(left, (left + right) // 2, tail)
     else
-        -- return bin_lookup((left + right + 1) // 2, right, tail)
-        return bin_lookup(math.floor((left + right + 1) / 2), right, tail)
+        return bin_lookup((left + right + 1) // 2, right, tail)
     end
 end
 
