@@ -51,4 +51,12 @@ function M.map<A,B>(t: {A}, f: function(A):(B)): {B}
     return r
 end
 
+function M.split(s: string, sep: string): {string}
+    local r = {}
+    for v in (s .. sep):gmatch("(.-)" .. sep) do
+        r[#r+1] = v
+    end
+    return r
+end
+
 return M
