@@ -23,11 +23,7 @@ local function parse_line(line: string) : LineData
 end
 
 local function parse_lines() : {LineData}
-    local lines, r = util.read_lines("input.txt"), {}
-    for i = 1, #lines do
-        r[i] = parse_line(lines[i])
-    end
-    return r
+    return util.map(util.read_lines("input.txt"), parse_line)
 end
 
 function M.count_valid(valid: ValidChecker) : number
