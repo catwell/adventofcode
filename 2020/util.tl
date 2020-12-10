@@ -65,4 +65,16 @@ function M.to_set<A>(t: {A}): {A: boolean}
     return r
 end
 
+function M.sum(t: {number}): number
+    local r = 0
+    for _, v in ipairs(t) do r = r + v end
+    return r
+end
+
+function M.product(t: {number}): number
+    local r = 1
+    for _, v in ipairs(t) do r = r * v end
+    return r
+end
+
 return M
