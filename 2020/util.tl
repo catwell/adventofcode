@@ -59,4 +59,10 @@ function M.split(s: string, sep: string): {string}
     return r
 end
 
+function M.to_set<A>(t: {A}): {A: boolean}
+    local r: {A: boolean} = {}
+    for _, v in ipairs(t) do r[v] = true end
+    return r
+end
+
 return M
