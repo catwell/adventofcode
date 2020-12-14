@@ -1,7 +1,5 @@
 local common = require "common"
 
-local Instruction = common.Instruction
-local Direction = common.Direction
 local Move = common.Move
 
 local record Waypoint
