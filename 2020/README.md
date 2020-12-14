@@ -2,7 +2,7 @@
 
 ## Notes
 
-- I don't expect to finish or do most days on time this year for personal reasons.
+- I don't expect to finish or do most days on time this year, because my son was born on day 8.
 - Let's do it in [Teal](https://github.com/teal-language/tl), because it's more fun.
 
 ## How to run
