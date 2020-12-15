@@ -34,7 +34,7 @@ function M.count_keys(t : {any:any}) : number
 end
 
 function M.parse_integers(s: string, i0: number) : {number}
-    local t, p = {}, i0
+    local t, p = {}, i0 or 1
     local function f(x: string)
         t[p] = tonumber(x)
         p = p + 1
