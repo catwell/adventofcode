@@ -27,6 +27,11 @@ function M.copy_table<K,V>(t: {K:V}) : {K:V}
     return r
 end
 
+function M.extend_seq<A>(t1: {A}, t2: {A})
+    local l1 = #t1
+    for i, v in ipairs(t2) do t1[l1 + i] = v end
+end
+
 function M.count_keys(t : {any:any}) : number
     local c = 0
     for _ in pairs(t) do c = c + 1 end
@@ -71,6 +76,10 @@ function M.to_set<A>(t: {A}): {A: boolean}
     local r: {A: boolean} = {}
     for _, v in ipairs(t) do r[v] = true end
     return r
+end
+
+function M.extend_set<A>(s1: {A: boolean}, s2: {A: boolean})
+    for v in pairs(s2) do s1[v] = true end
 end
 
 function M.sum(t: {number}): number
