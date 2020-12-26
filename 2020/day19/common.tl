@@ -14,7 +14,6 @@ local record Rule
     letter: string
     seq: Seq
     seq2: Seq
-
 end
 
 local type Rules = {number:Rule}
