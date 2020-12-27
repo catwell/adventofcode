@@ -15,7 +15,7 @@ local function hack(pk1: number, pk2: number): number
 
     end
     n = 1
-    for i = 1, c do n = round(n, pk2) end
+    for _ = 1, c do n = round(n, pk2) end
     return n
 end
 

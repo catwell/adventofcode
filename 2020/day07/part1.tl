@@ -7,11 +7,11 @@ local l2, c2 : common.ColorSet, number = {["shiny gold"] = true}, 1
 while c1 ~= c2 do
     l1, c1 = l2, c2
     l2 = {}
-    for c1 in pairs(l1) do
-        l2[c1] = true
-        if g[c1] then
-            for c2 in pairs(g[c1]) do
-                l2[c2] = true
+    for c_1 in pairs(l1) do
+        l2[c_1] = true
+        if g[c_1] then
+            for c_2 in pairs(g[c_1]) do
+                l2[c_2] = true
             end
         end
     end

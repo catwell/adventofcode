@@ -61,7 +61,7 @@ local function count_occupied(st: Grid): number
 end
 
 local function find_fix_point(st: Grid, counter: SeatCounter, min_seats: number): Grid
-    local mod = 0
+    local mod : number
     while true do
         st, mod = step(st, counter, min_seats)
         if mod == 0 then break end

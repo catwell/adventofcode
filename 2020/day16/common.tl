@@ -130,7 +130,7 @@ local state_mt = {__index = {
     decoded_ticket = state_decoded_ticket,
 }}
 
-local function new_state(initial: {number}): State
+local function new_state(): State
     return setmetatable({}, state_mt)
 end
 

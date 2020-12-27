@@ -5,7 +5,7 @@ die () { >&2 echo "$@"; exit 1 ; }
 path="$(dirname "$0")"
 
 check_one () {
-    fn="$(mktemp "/tmp/XXXXXX-$(basename $1).lua")"
+    fn="$(mktemp "/tmp/XXXXXX-$(dirname $1)-$(basename $1).lua")"
     "$path"/tl.sh gen --output "$fn" "$1" || die
     luacheck --config "$path"/.luacheckrc --codes "$fn"
     rm "$fn"

@@ -49,9 +49,9 @@ local function parse_mask(l: string): Mask
 end
 
 local function parse_instruction(l: string) : Instruction
-    local reg, val = l:match("^mem%[(%d+)%] = (%d+)$")
+    local reg, v = l:match("^mem%[(%d+)%] = (%d+)$")
     if reg then
-        local val: Mem = {reg = tonumber(reg), val = tonumber(val)}
+        local val: Mem = {reg = tonumber(reg), val = tonumber(v)}
         return {itype = "mem", val = val}
     else
         return {itype = "mask", val = parse_mask(l)}

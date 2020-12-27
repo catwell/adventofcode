@@ -1,5 +1,3 @@
-local util = require "util"
-
 -- in `cups`, cups[i] is the label of the successor of cup with label `i`
 
 local record State

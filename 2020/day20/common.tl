@@ -117,12 +117,6 @@ local function orient_top_left_data(data: {string}, b_map: BorderIdMap) : {strin
     return rotate_left(data)
 end
 
-local function tile_data_print(data: {string})
-    for _, s in ipairs(data) do
-        print(s)
-    end
-end
-
 local function match_right_border(tile: Tile, tiles: Tiles, b_map: BorderIdMap): Tile
     local match = get_borders(tile.data)[2]
     local match_normalized = normalize_border(match)

@@ -12,14 +12,14 @@ local function round(p1: {number}, p2: {number}, played: {string: boolean}): {nu
     local c1 = table.remove(p1, 1)
     local c2 = table.remove(p2, 1)
     if #p1 < c1 or #p2 < c2 then
-        if c1 > c2 then p1, c1, p2, c2 = p2, c2, p1, c1 end
+        if c1 > c2 then c1, p2, c2 = c2, p1, c1 end
         table.insert(p2, c2)
         table.insert(p2, c1)
     else
         local sub_p1 = {table.unpack(p1, 1, c1)}
         local sub_p2 = {table.unpack(p2, 1, c2)}
         local w = game(sub_p1, sub_p2)
-        if w == sub_p1 then p1, c1, p2, c2 = p2, c2, p1, c1 end
+        if w == sub_p1 then c1, p2, c2 = c2, p1, c1 end
         table.insert(p2, c2)
         table.insert(p2, c1)
     end

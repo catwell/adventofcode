@@ -58,14 +58,6 @@ local function rule_match_seq(rules: Rules, seq: Seq, msg: string, matched: Matc
     return r
 end
 
-local function max_msg(msgs: MsgSet): number
-    local r = 0
-    for m in pairs(msgs) do
-        if #m > r then r = #m end
-    end
-    return r
-end
-
 rule_match = function(rules: Rules, id: number, msgs: MsgSet, matched: MatchCache): MsgSet
     local r = {}
     for msg in pairs(msgs) do
