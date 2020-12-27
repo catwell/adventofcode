@@ -78,8 +78,20 @@ function M.to_set<A>(t: {A}): {A: boolean}
     return r
 end
 
-function M.extend_set<A>(s1: {A: boolean}, s2: {A: boolean})
-    for v in pairs(s2) do s1[v] = true end
+function M.set_add<K,V>(s1: {K:V}, s2: {K:V})
+    for k, v in pairs(s2) do
+        s1[k] = s1[k] or v
+    end
+end
+
+function M.set_subtract<K,V,W>(s1: {K:V}, s2: {K:W})
+    for v in pairs(s2) do s1[v] = nil end
+end
+
+function M.set_intersect<K,V,W>(s1: {K:V}, s2: {K:W})
+    for v in pairs(s1) do
+        if not s2[v] then s1[v] = nil end
+    end
 end
 
 function M.sum(t: {number}): number

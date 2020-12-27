@@ -78,14 +78,14 @@ rule_match = function(rules: Rules, id: number, msgs: MsgSet, matched: MatchCach
                     r2[msg:sub(2)] = true
                 end
             elseif rule.kind == "seq" then
-                util.extend_set(r2, rule_match_seq(rules, rule.seq, msg, matched))
+                util.set_add(r2, rule_match_seq(rules, rule.seq, msg, matched))
             else
-                util.extend_set(r2, rule_match_seq(rules, rule.seq, msg, matched))
-                util.extend_set(r2, rule_match_seq(rules, rule.seq2, msg, matched))
+                util.set_add(r2, rule_match_seq(rules, rule.seq, msg, matched))
+                util.set_add(r2, rule_match_seq(rules, rule.seq2, msg, matched))
             end
             matched[ref] = r2
         end
-        util.extend_set(r, matched[ref])
+        util.set_add(r, matched[ref])
     end
     return r
 end
