@@ -5,7 +5,7 @@ local input = util.read_file("input.txt")
 local t = {}
 
 for v in input:gmatch("%d+") do
-    table.insert(t, tonumber(v))
+    table.insert(t, math.tointeger(v))
 end
 
 for i = 1, #t do

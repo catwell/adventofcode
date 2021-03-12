@@ -2,11 +2,11 @@ local util = require "util"
 
 local M = {}
 
-local function parse_input() : {number}
-    return util.map(util.read_lines("input.txt"), tonumber as function(string): number)
+local function parse_input() : {integer}
+    return util.map(util.read_lines("input.txt"), math.tointeger as function(string): integer)
 end
 
-function M.initial_arrangement(): {number}
+function M.initial_arrangement(): {integer}
     local t = parse_input()
     table.sort(t)
     table.insert(t, 1, 0)

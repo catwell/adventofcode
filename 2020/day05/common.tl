@@ -2,7 +2,7 @@ local util = require "util"
 
 local M = {}
 
-local function bin_lookup(left: number, right: number, stack: string): number
+local function bin_lookup(left: integer, right: integer, stack: string): integer
     if stack == "" then
         assert(left == right)
         return left
@@ -15,11 +15,11 @@ local function bin_lookup(left: number, right: number, stack: string): number
     end
 end
 
-local function seat_id(spec: string) : number
+local function seat_id(spec: string) : integer
     return 8 * bin_lookup(0, 127, spec:sub(1,7)) + bin_lookup(0, 7, spec:sub(8))
 end
 
-function M.seat_ids() : {number}
+function M.seat_ids() : {integer}
     local lines = util.read_lines("input.txt")
     return util.map(lines, seat_id)
 end

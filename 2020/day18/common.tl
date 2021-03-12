@@ -1,10 +1,10 @@
 local util = require "util"
 
-local type FlatEvaluator = function(string): number
+local type FlatEvaluator = function(string): integer
 
 local M = {}
 
-local function evaluate(s: string, flat_eval: FlatEvaluator): number
+local function evaluate(s: string, flat_eval: FlatEvaluator): integer
     local t : {string} = {}
     local pos = 1
     while true do
@@ -21,8 +21,8 @@ local function evaluate(s: string, flat_eval: FlatEvaluator): number
     return flat_eval(table.concat(t))
 end
 
-function M.compute(flat_eval: FlatEvaluator): number
-    local function f(s: string): number
+function M.compute(flat_eval: FlatEvaluator): integer
+    local function f(s: string): integer
         return evaluate(s, flat_eval)
     end
     return util.sum(util.map(util.read_lines("input.txt"), f))

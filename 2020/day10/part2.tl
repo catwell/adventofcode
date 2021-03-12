@@ -1,7 +1,7 @@
 local common = require "common"
 local util = require "util"
 
-local function candidate_sequences(t: {number}): {{number}}
+local function candidate_sequences(t: {integer}): {{integer}}
     local r, prev = {}, 1
     for p = 2, #t do
         local d = t[p] - t[p-1]
@@ -13,7 +13,7 @@ local function candidate_sequences(t: {number}): {{number}}
     return r
 end
 
-local function valid(candidate: {number}): boolean
+local function valid(candidate: {integer}): boolean
     for p = 2, #candidate do
         if candidate[p] - candidate[p-1] > 3 then
             return false
@@ -22,7 +22,7 @@ local function valid(candidate: {number}): boolean
     return true
 end
 
-local function arrangements(sequence: {number}, processed: {string:boolean}): number
+local function arrangements(sequence: {integer}, processed: {string:boolean}): integer
     if not processed then processed = {} end
     local r = 1
     for i = 2, #sequence - 1 do
@@ -31,7 +31,7 @@ local function arrangements(sequence: {number}, processed: {string:boolean}): nu
             candidate[#candidate + 1] = sequence[j]
         end
         if valid(candidate) then
-            local s = table.concat(util.map(candidate, tostring as function(number): string), '-')
+            local s = table.concat(util.map(candidate, tostring as function(integer): string), '-')
             if not processed[s] then
                 processed[s] = true
                 r = r + arrangements(candidate, processed)
@@ -42,4 +42,4 @@ local function arrangements(sequence: {number}, processed: {string:boolean}): nu
 end
 
 local seqs = candidate_sequences(common.initial_arrangement())
-print(util.product(util.map(seqs, arrangements as function({number}): number)))
+print(util.product(util.map(seqs, arrangements as function({integer}): integer)))

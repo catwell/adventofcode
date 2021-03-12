@@ -5,8 +5,8 @@ local Direction = common.Direction
 local Move = common.Move
 
 local record Ship
-    x: number
-    y: number
+    x: integer
+    y: integer
     dir: Direction
     move: function(Ship, Move)
 end

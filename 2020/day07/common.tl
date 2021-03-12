@@ -3,7 +3,7 @@ local util = require "util"
 local type Color = string
 
 local record BagData
-   count: number
+   count: integer
    color: Color
 end
 
@@ -20,7 +20,7 @@ local function parse_line(line: string) : Color, {BagData}
     local color, right = string.match(line, "(%w+ %w+) bags contain (.+)")
     local r = {}
     local f = function(n: string, c: string)
-        r[#r+1] = {count = tonumber(n), color = c}
+        r[#r+1] = {count = math.tointeger(n), color = c}
     end
     right:gsub("(%d+) (%w+ %w+) bag", f)
     return color, r

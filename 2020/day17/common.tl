@@ -9,26 +9,26 @@ local type Grid = {{{{Cube}}}}
 local record State
     grid: Grid
     four_d: boolean
-    xmin: number
-    xmax: number
-    ymin: number
-    ymax: number
-    zmin: number
-    zmax: number
-    wmin: number
-    wmax: number
-    three_d_space: function(State, number): {{{Cube}}}
-    cube_at: function(State, number, number, number, number): Cube
-    neighbors: function(State, number, number, number, number): {Cube}
+    xmin: integer
+    xmax: integer
+    ymin: integer
+    ymax: integer
+    zmin: integer
+    zmax: integer
+    wmin: integer
+    wmax: integer
+    three_d_space: function(State, integer): {{{Cube}}}
+    cube_at: function(State, integer, integer, integer, integer): Cube
+    neighbors: function(State, integer, integer, integer, integer): {Cube}
     step: function(State): State
-    count_active: function(State): number
+    count_active: function(State): integer
 end
 
 local M = {}
 
 local new_state : function(boolean) : State
 
-local function state_three_d_space(self: State, w: number): {{{Cube}}}
+local function state_three_d_space(self: State, w: integer): {{{Cube}}}
     if not self.four_d then return self.grid[0] end
     if not self.grid[w] then self.grid[w] = {} end
     if w < self.wmin then self.wmin = w end
@@ -37,7 +37,7 @@ local function state_three_d_space(self: State, w: number): {{{Cube}}}
 end
 
 local function state_cube_at(
-    self: State, x: number, y: number, z: number, w: number
+    self: State, x: integer, y: integer, z: integer, w: integer
 ): Cube
     local space = self:three_d_space(w)
     if not space[z] then space[z] = {} end
@@ -53,7 +53,7 @@ local function state_cube_at(
 end
 
 local function state_neighbors(
-    self: State, x: number, y: number, z: number, w: number
+    self: State, x: integer, y: integer, z: integer, w: integer
 ): {Cube}
     local r = {}
     local _dw = self.four_d and 1 or 0
@@ -99,7 +99,7 @@ local function state_step(self: State): State
     return r
 end
 
-local function state_count_active(self: State): number
+local function state_count_active(self: State): integer
     local r = 0
     for w = self.wmin, self.wmax do
         for z = self.zmin, self.zmax do

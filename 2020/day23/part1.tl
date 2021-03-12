@@ -3,7 +3,7 @@ local common = require "common"
 local state = common.new_state(common.INPUT, 9)
 for _ = 1, 100 do common.move(state) end
 
-local function signature(cups: {number}): string
+local function signature(cups: {integer}): string
     local r, p = {}, 1
     while true do
         p = cups[p]

@@ -1,8 +1,8 @@
-local function round(v: number, sn: number): number
+local function round(v: integer, sn: integer): integer
     return (v * sn) % 20201227
 end
 
-local function hack(pk1: number, pk2: number): number
+local function hack(pk1: integer, pk2: integer): integer
     local n, c = 1, 0
     while true do
         n, c = round(n, 7), c + 1

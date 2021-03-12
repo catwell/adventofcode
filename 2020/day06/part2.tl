@@ -1,9 +1,9 @@
 local common = require "common"
 local util = require "util"
 
-local function count(s: string): number
+local function count(s: string): integer
     local rows = util.split(s, "\n")
-    local h : {string:number} = {}
+    local h : {string:integer} = {}
     local function f(x: string)
         h[x] = (h[x] or 0) + 1
     end

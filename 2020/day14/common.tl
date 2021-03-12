@@ -1,14 +1,14 @@
 local util = require "util"
 
 local record Mem
-   reg: number
-   val: number
+   reg: integer
+   val: integer
 end
 
 local record Mask
-    pos: number
-    neg: number
-    flt: {number}
+    pos: integer
+    neg: integer
+    flt: {integer}
 end
 
 local enum InsType
@@ -26,8 +26,8 @@ local type MemExec = function(Machine, Mem)
 local record Machine
     instructions: {Instruction}
     mask: Mask
-    pos: number
-    mem: {number:number}
+    pos: integer
+    mem: {integer:integer}
     run_one: function(Machine, MemExec)
     run_all: function(Machine, MemExec)
 end
@@ -51,7 +51,7 @@ end
 local function parse_instruction(l: string) : Instruction
     local reg, v = l:match("^mem%[(%d+)%] = (%d+)$")
     if reg then
-        local val: Mem = {reg = tonumber(reg), val = tonumber(v)}
+        local val: Mem = {reg = math.tointeger(reg), val = math.tointeger(v)}
         return {itype = "mem", val = val}
     else
         return {itype = "mask", val = parse_mask(l)}

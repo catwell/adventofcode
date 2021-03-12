@@ -1,27 +1,27 @@
 -- in `cups`, cups[i] is the label of the successor of cup with label `i`
 
 local record State
-    current: number
-    cups: {number}
-    cups_count: number
+    current: integer
+    cups: {integer}
+    cups_count: integer
 end
 
 local M = { INPUT = {7, 8, 4, 2, 3, 5, 9, 1, 6} }
 
-local function pick_one(state: State): number
+local function pick_one(state: State): integer
     local v = state.cups[state.current]
     state.cups[state.current] = state.cups[v]
     state.cups[v] = nil
     return v
 end
 
-local function insert_one(state: State, label: number, pos: number)
+local function insert_one(state: State, label: integer, pos: integer)
     local n = state.cups[pos]
     state.cups[pos] = label
     state.cups[label] = n
 end
 
-local function find_destination(state: State): number
+local function find_destination(state: State): integer
     local r = state.current
     while true do
         r = r - 1
@@ -39,7 +39,7 @@ function M.move(state: State)
 end
 
 
-function M.new_state(input: {number}, count: number): State
+function M.new_state(input: {integer}, count: integer): State
     for i = #input + 1, count do
         input[i] = i
     end

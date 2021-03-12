@@ -1,10 +1,10 @@
 local common = require "common"
 
-local function flat_eval(s: string): number
+local function flat_eval(s: string): integer
     local pos, _, op = s:find("([+*])[^+*]+$")
-    if not pos then return tonumber(s) end
+    if not pos then return math.tointeger(s) end
     local left = flat_eval(s:sub(1, pos - 1))
-    local right = tonumber(s:sub(pos + 1))
+    local right = math.tointeger(s:sub(pos + 1))
     if op == "+" then
         return left + right
     else

@@ -15,7 +15,7 @@ end
 local function make_infinite(row: {boolean}) : {boolean}
     local l = #row
     return setmetatable(row, {
-        __index = function(t: {boolean}, i: number) : boolean
+        __index = function(t: {boolean}, i: integer) : boolean
             return rawget(t, ((i - 1) % l) + 1)
         end
     })
@@ -39,7 +39,7 @@ function M.display(input: {{boolean}})
     end
 end
 
-function M.count_slope(input: {{boolean}}, right: number, down: number) : number
+function M.count_slope(input: {{boolean}}, right: integer, down: integer) : integer
     local row, col, count = 1, 1, 0
     while input[row] do
         if input[row][col] then count = count + 1 end

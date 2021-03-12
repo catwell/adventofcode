@@ -1,14 +1,14 @@
 local util = require "util"
 
 local record Tile
-    id: number
+    id: integer
     borders: {string}
     data: {string}
 end
 
-local type Tiles = {number: Tile}
+local type Tiles = {integer: Tile}
 
-local type BorderIdMap = {string: {number}}
+local type BorderIdMap = {string: {integer}}
 
 local M = {}
 
@@ -35,7 +35,7 @@ end
 local function parse_tile(s: string): Tile
     local data = util.split(s, "\n")
     local l1 = table.remove(data, 1)
-    local id = tonumber(l1:match("^Tile (%d+):$"))
+    local id = math.tointeger(l1:match("^Tile (%d+):$"))
     local borders = get_borders(data)
     return {
         id = id,
@@ -67,7 +67,7 @@ local function flip_vert(data: {string}): {string}
 end
 
 function M.border_to_id(tiles: Tiles): BorderIdMap
-    local r : {string: {number}} = {}
+    local r : {string: {integer}} = {}
     for _, tile in pairs(tiles) do
         for _, border in ipairs(tile.borders) do
             if r[border] then
@@ -89,7 +89,7 @@ function M.parse_input() : Tiles
     return r
 end
 
-local function count_external_borders(tile: Tile, b_map: BorderIdMap): number
+local function count_external_borders(tile: Tile, b_map: BorderIdMap): integer
     local r = 0
     for _, border in ipairs(tile.borders) do
         if #b_map[border] == 1 then r = r + 1 end
@@ -97,7 +97,7 @@ local function count_external_borders(tile: Tile, b_map: BorderIdMap): number
     return r
 end
 
-function M.corner_ids(tiles: Tiles, b_map: BorderIdMap): {number}
+function M.corner_ids(tiles: Tiles, b_map: BorderIdMap): {integer}
     local r = {}
     for _, tile in pairs(tiles) do
         if count_external_borders(tile, b_map) == 2 then
@@ -197,7 +197,7 @@ function M.get_image(grid: {{Tile}}): {string}
     return r
 end
 
-local function sea_monster_pattern(row: number, col: number): {{number}}
+local function sea_monster_pattern(row: integer, col: integer): {{integer}}
     return {
         {row + 1, col},
         {row + 2, col + 1},
@@ -217,7 +217,7 @@ local function sea_monster_pattern(row: number, col: number): {{number}}
     }
 end
 
-local function has_sea_monster(image: {string}, row: number, col: number): boolean
+local function has_sea_monster(image: {string}, row: integer, col: integer): boolean
     for _, p in ipairs(sea_monster_pattern(row, col)) do
         if image[p[1]]:sub(p[2], p[2]) ~= "#" then
             return false
@@ -226,13 +226,13 @@ local function has_sea_monster(image: {string}, row: number, col: number): boole
     return true
 end
 
-local function mark_sea_monster(map: {{boolean}}, row: number, col: number)
+local function mark_sea_monster(map: {{boolean}}, row: integer, col: integer)
     for _, p in ipairs(sea_monster_pattern(row, col)) do
         map[p[1]][p[2]] = true
     end
 end
 
-local function count_sea_monsters(image: {string}): number, number
+local function count_sea_monsters(image: {string}): integer, integer
     local c, m, n = 0, {{}, {}}, 0
     for row = 1, #image - 2 do
         m[row + 2] = {}
@@ -255,7 +255,7 @@ local function count_sea_monsters(image: {string}): number, number
     return c, n
 end
 
-function M.water_roughness(image: {string}): number
+function M.water_roughness(image: {string}): integer
     for _ = 1, 2 do
         for _ = 1, 4 do
             local c, r = count_sea_monsters(image)

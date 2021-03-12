@@ -1,6 +1,6 @@
 local common = require "common"
 
-local function try_switching_nop(tried_pos: {number:boolean}): boolean
+local function try_switching_nop(tried_pos: {integer:boolean}): boolean
     local machine = common.machine_from_input()
     local switched = false
     while true do

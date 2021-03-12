@@ -3,14 +3,14 @@ local common = require "common"
 local Move = common.Move
 
 local record Waypoint
-    x: number
-    y: number
+    x: integer
+    y: integer
     move: function(Waypoint, Move)
 end
 
 local record Ship
-    x: number
-    y: number
+    x: integer
+    y: integer
     wp: Waypoint
     move: function(Ship, Move)
 end

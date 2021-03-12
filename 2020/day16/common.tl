@@ -1,10 +1,10 @@
 local util = require "util"
 
-local type Ticket = {number}
+local type Ticket = {integer}
 
 local record Range
-    min: number
-    max: number
+    min: integer
+    max: integer
 end
 
 local type Ranges = {string:{Range}}
@@ -13,17 +13,17 @@ local record State
     ranges: Ranges
     my_ticket: Ticket
     tickets: {Ticket}
-    check_number_validity: function(State, number): {string}
-    check_ticket_validity: function(State, Ticket): boolean, number
-    scanning_error_rate: function(State): number
+    check_number_validity: function(State, integer): {string}
+    check_ticket_validity: function(State, Ticket): boolean, integer
+    scanning_error_rate: function(State): integer
     discard_invalid_tickets: function(State)
-    determine_columns: function(State): {string:number}
-    decoded_ticket: function(State): {string:number}
+    determine_columns: function(State): {string:integer}
+    decoded_ticket: function(State): {string:integer}
 end
 
 local M = {}
 
-local function state_check_number_validity(self: State, n: number): {string}
+local function state_check_number_validity(self: State, n: integer): {string}
     local r = {}
     for field, ranges in pairs(self.ranges) do
         for _, range in ipairs(ranges) do
@@ -35,7 +35,7 @@ local function state_check_number_validity(self: State, n: number): {string}
     return r
 end
 
-local function state_check_ticket_validity(self: State, ticket: Ticket): boolean, number
+local function state_check_ticket_validity(self: State, ticket: Ticket): boolean, integer
     for _, n in ipairs(ticket) do
         if #self:check_number_validity(n) == 0 then
             return false, n
@@ -44,7 +44,7 @@ local function state_check_ticket_validity(self: State, ticket: Ticket): boolean
     return true, 0
 end
 
-local function state_scanning_error_rate(self: State): number
+local function state_scanning_error_rate(self: State): integer
     local r = 0
     for _, ticket in ipairs(self.tickets) do
         local _, n = self:check_ticket_validity(ticket)
@@ -63,7 +63,7 @@ local function state_discard_invalid_tickets(self: State)
     self.tickets = tickets
 end
 
-local function _columns_for(state: State, ranges: {Range}): {number:boolean}
+local function _columns_for(state: State, ranges: {Range}): {integer:boolean}
     local r = {}
     for i = 1, #state.my_ticket do
         local possible = true
@@ -81,7 +81,7 @@ local function _columns_for(state: State, ranges: {Range}): {number:boolean}
     return r
 end
 
-local function _cleanup(possible_columns: {string:{number:boolean}}, field: string, column: number)
+local function _cleanup(possible_columns: {string:{integer:boolean}}, field: string, column: integer)
     for cur_field, possibilities in pairs(possible_columns) do
         if cur_field ~= field then
             possibilities[column] = nil
@@ -89,8 +89,8 @@ local function _cleanup(possible_columns: {string:{number:boolean}}, field: stri
     end
 end
 
-local function state_determine_columns(self: State) : {string:number}
-    local possible_columns : {string:{number: boolean}} = {}
+local function state_determine_columns(self: State) : {string:integer}
+    local possible_columns : {string:{integer: boolean}} = {}
     for field, ranges in pairs(self.ranges) do
         possible_columns[field] = _columns_for(self, ranges)
     end
@@ -112,7 +112,7 @@ local function state_determine_columns(self: State) : {string:number}
     return r
 end
 
-local function state_decoded_ticket(self: State) : {string:number}
+local function state_decoded_ticket(self: State) : {string:integer}
     local columns = self:determine_columns()
     local r = {}
     for field, i in pairs(columns) do
@@ -138,8 +138,8 @@ local function parse_ranges_line(s: string) : string, {Range}
     local ptrn = "^([^:]+): (%d+)-(%d+) or (%d+)-(%d+)$"
     local field, min1, max1, min2, max2 = s:match(ptrn)
     return field, {
-        {min = tonumber(min1), max = tonumber(max1)},
-        {min = tonumber(min2), max = tonumber(max2)},
+        {min = math.tointeger(min1), max = math.tointeger(max1)},
+        {min = math.tointeger(min2), max = math.tointeger(max2)},
     }
 end
 

@@ -1,25 +1,25 @@
 local util = require "util"
 
 local record Spoken
-    last: number
-    prev: number
+    last: integer
+    prev: integer
 end
 
 local record State
-    spoken: {number:Spoken}
-    turn: number
-    last_spoken: number
-    speak: function(State, number)
+    spoken: {integer:Spoken}
+    turn: integer
+    last_spoken: integer
+    speak: function(State, integer)
     play: function(State)
 end
 
 local M = {}
 
-local function parse_input() : {number}
+local function parse_input() : {integer}
     return util.parse_integers(util.read_file("input.txt"))
 end
 
-local function speak(self: State, n: number)
+local function speak(self: State, n: integer)
     self.last_spoken = n
     self.turn = self.turn + 1
     if not self.spoken[n] then
@@ -40,7 +40,7 @@ end
 
 local state_mt = {__index = {speak = speak, play = play}}
 
-local function new_state(initial: {number}): State
+local function new_state(initial: {integer}): State
     local r : State = setmetatable({
         spoken = {},
         turn = 0,
@@ -51,7 +51,7 @@ local function new_state(initial: {number}): State
     return r
 end
 
-function M.num_at(n: number) : number
+function M.num_at(n: integer) : integer
     local input = parse_input()
     local st = new_state(input)
     while st.turn < n do

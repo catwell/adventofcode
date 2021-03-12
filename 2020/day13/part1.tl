@@ -1,7 +1,7 @@
 local util = require "util"
 
 local lines = util.read_lines("input.txt")
-local time, buses = tonumber(lines[1]), util.parse_integers(lines[2])
+local time, buses = math.tointeger(lines[1]), util.parse_integers(lines[2])
 
 local min, min_bus = math.huge, 0
 for _, bus in ipairs(buses) do

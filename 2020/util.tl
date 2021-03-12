@@ -32,16 +32,16 @@ function M.extend_seq<A>(t1: {A}, t2: {A})
     for i, v in ipairs(t2) do t1[l1 + i] = v end
 end
 
-function M.count_keys(t : {any:any}) : number
+function M.count_keys(t : {any:any}) : integer
     local c = 0
     for _ in pairs(t) do c = c + 1 end
     return c
 end
 
-function M.parse_integers(s: string, i0: number) : {number}
+function M.parse_integers(s: string, i0: integer) : {integer}
     local t, p = {}, i0 or 1
     local function f(x: string)
-        t[p] = tonumber(x)
+        t[p] = math.tointeger(x)
         p = p + 1
     end
     s:gsub("[-%d]+", f)
@@ -56,7 +56,7 @@ function M.map<A,B>(t: {A}, f: function(A):(B)): {B}
     return r
 end
 
-function M.count<A>(t: {A}, f: function(A):(boolean)): number
+function M.count<A>(t: {A}, f: function(A):(boolean)): integer
     local r = 0
     for _, v in ipairs(t) do
         if f(v) then r = r + 1 end
@@ -94,13 +94,13 @@ function M.set_intersect<K,V,W>(s1: {K:V}, s2: {K:W})
     end
 end
 
-function M.sum(t: {number}): number
+function M.sum(t: {integer}): integer
     local r = 0
     for _, v in ipairs(t) do r = r + v end
     return r
 end
 
-function M.product(t: {number}): number
+function M.product(t: {integer}): integer
     local r = 1
     for _, v in ipairs(t) do r = r * v end
     return r

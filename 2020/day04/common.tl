@@ -15,7 +15,7 @@ local function parse_passport_data(data: string) : Passport
 end
 
 
-function M.count_valid(valid: ValidChecker): number
+function M.count_valid(valid: ValidChecker): integer
     local input = util.split(util.read_file("input.txt"), "\n\n")
     local passports = util.map(input, parse_passport_data)
     local validity = util.map(passports, valid)

@@ -1,6 +1,6 @@
 local common = require "common"
 
-local function adjacent_occupied(st: common.Grid, row: number, col: number): number
+local function adjacent_occupied(st: common.Grid, row: integer, col: integer): integer
     local c = 0
     if row > 1 then
         for i = col - 1, col + 1 do

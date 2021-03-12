@@ -2,7 +2,7 @@ local util = require "util"
 
 local M = {}
 
-function M.process(count: function(string): number): number
+function M.process(count: function(string): integer): integer
     local groups = util.split(util.read_file("input.txt"), "\n\n")
     local counts = util.map(groups, count)
     local c = 0

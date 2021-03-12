@@ -7,7 +7,7 @@ local enum RuleKind
     "custom"
 end
 
-local type Seq = {number}
+local type Seq = {integer}
 
 local record Rule
     kind: RuleKind
@@ -16,7 +16,7 @@ local record Rule
     seq2: Seq
 end
 
-local type Rules = {number:Rule}
+local type Rules = {integer:Rule}
 
 local type MsgSet = {string: boolean}
 
@@ -29,17 +29,17 @@ local function parse_rules(ss: {string}): Rules
     for _, s in ipairs(ss) do
         if s:find('"') then
             local id, letter = s:match("^(%d+): \"([ab])\"$")
-            r[tonumber(id)] = { kind = "letter", letter = letter }
+            r[math.tointeger(id)] = { kind = "letter", letter = letter }
         elseif s:find("|") then
             local id, nums, nums2 = s:match("^(%d+): ([%d%s]+) | ([%d%s]+)$")
-            r[tonumber(id)] = {
+            r[math.tointeger(id)] = {
                 kind = "alternative",
                 seq = util.parse_integers(nums),
                 seq2 = util.parse_integers(nums2),
             }
         else
             local id, nums = s:match("^(%d+): ([%d%s]+)$")
-            r[tonumber(id)] = {
+            r[math.tointeger(id)] = {
                 kind = "seq",
                 seq = util.parse_integers(nums),
             }
@@ -48,7 +48,7 @@ local function parse_rules(ss: {string}): Rules
     return r
 end
 
-local rule_match: function(rules: Rules, id: number, msgs: MsgSet, matched: MatchCache): MsgSet
+local rule_match: function(rules: Rules, id: integer, msgs: MsgSet, matched: MatchCache): MsgSet
 
 local function rule_match_seq(rules: Rules, seq: Seq, msg: string, matched: MatchCache): MsgSet
     local r = {[msg] = true}
@@ -58,7 +58,7 @@ local function rule_match_seq(rules: Rules, seq: Seq, msg: string, matched: Matc
     return r
 end
 
-rule_match = function(rules: Rules, id: number, msgs: MsgSet, matched: MatchCache): MsgSet
+rule_match = function(rules: Rules, id: integer, msgs: MsgSet, matched: MatchCache): MsgSet
     local r = {}
     for msg in pairs(msgs) do
         local rule = rules[id]
@@ -89,7 +89,7 @@ function M.parse_input() : Rules, MsgSet
     return rules, msgs
 end
 
-function M.count_matching(rules: Rules, msgs: MsgSet): number
+function M.count_matching(rules: Rules, msgs: MsgSet): integer
     local n, matched = 0, {}
     for msg in pairs(msgs) do
         local r = rule_match(rules, 0, {[msg] = true}, matched)

@@ -1,8 +1,8 @@
 local common = require "common"
 
-local game : function({number}, {number}): {number}
+local game : function({integer}, {integer}): {integer}
 
-local function round(p1: {number}, p2: {number}, played: {string: boolean}): {number}
+local function round(p1: {integer}, p2: {integer}, played: {string: boolean}): {integer}
     local sig = table.concat(p1 as {string}, ",") .. "|" .. table.concat(p2 as {string}, ",")
     if played[sig] then
         return p1
@@ -25,7 +25,7 @@ local function round(p1: {number}, p2: {number}, played: {string: boolean}): {nu
     end
 end
 
-function game(p1: {number}, p2: {number}): {number}
+function game(p1: {integer}, p2: {integer}): {integer}
     local played, winner = {}, {}
     while #p1 > 0 and #p2 > 0 do
         winner = round(p1, p2, played)

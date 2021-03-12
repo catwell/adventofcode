@@ -4,13 +4,13 @@ local fmt = string.format
 local record Instruction
    executed: boolean
    code: string
-   operand: number
+   operand: integer
 end
 
 local record Machine
     instructions: {Instruction}
-    accumulator: number
-    pos: number
+    accumulator: integer
+    pos: integer
     run_one: function(Machine)
 end
 
@@ -21,7 +21,7 @@ local function parse_line(line: string) : Instruction
     return {
         executed = false,
         code = code,
-        operand = tonumber(operand),
+        operand = math.tointeger(operand),
     }
 end
 

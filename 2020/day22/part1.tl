@@ -1,6 +1,6 @@
 local common = require "common"
 
-local function play(p1: {number}, p2: {number})
+local function play(p1: {integer}, p2: {integer})
     if p1[1] > p2[1] then p1, p2 = p2, p1 end
     table.insert(p2, table.remove(p2, 1))
     table.insert(p2, table.remove(p1, 1))

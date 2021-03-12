@@ -19,7 +19,7 @@ end
 
 local record Move
    ins: Instruction
-   arg: number
+   arg: integer
 end
 
 local M = {
@@ -32,7 +32,7 @@ local function parse_line(l: string) : Move
     local ins, argv = l:match("^([NSEWLRF])(%d+)$")
     return {
         ins = ins as Instruction,
-        arg = tonumber(argv),
+        arg = math.tointeger(argv),
     }
 end
 

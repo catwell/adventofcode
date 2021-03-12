@@ -2,8 +2,8 @@ local common = require "common"
 local util = require "util"
 
 local g = common.reverse_graph(common.parse_input())
-local l1, c1 : common.ColorSet, number
-local l2, c2 : common.ColorSet, number = {["shiny gold"] = true}, 1
+local l1, c1 : common.ColorSet, integer
+local l2, c2 : common.ColorSet, integer = {["shiny gold"] = true}, 1
 while c1 ~= c2 do
     l1, c1 = l2, c2
     l2 = {}

@@ -1,6 +1,6 @@
 local common = require "common"
 
-local function get_solution(input: {number}, p0: number, p1: number): number
+local function get_solution(input: {integer}, p0: integer, p1: integer): integer
     local min, max = input[p0], input[p0]
     for i = p0 + 1, p1 do
         if input[i] < min then min = input[i] end

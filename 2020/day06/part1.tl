@@ -1,6 +1,6 @@
 local common = require "common"
 
-local function count(s: string): number
+local function count(s: string): integer
     local h, c = {}, 0
     local function f(x: string)
         if not h[x] then

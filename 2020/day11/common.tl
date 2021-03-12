@@ -8,7 +8,7 @@ end
 
 local type Grid = {{Cell}}
 
-local type SeatCounter = function(Grid, number, number, number): number
+local type SeatCounter = function(Grid, integer, integer, integer): integer
 
 local M = {Grid = Grid}
 
@@ -26,7 +26,7 @@ local function parse_input() : Grid
     return util.map(lines, parse_line)
 end
 
-local function step(st: Grid, counter: SeatCounter, min_seats: number): Grid, number
+local function step(st: Grid, counter: SeatCounter, min_seats: integer): Grid, integer
     local mod = 0
     local r: Grid = {}
     for row = 1, #st do
@@ -48,7 +48,7 @@ local function step(st: Grid, counter: SeatCounter, min_seats: number): Grid, nu
     return r, mod
 end
 
-local function count_occupied(st: Grid): number
+local function count_occupied(st: Grid): integer
     local r = 0
     for row = 1, #st do
         for col = 1, #st[row] do
@@ -60,8 +60,8 @@ local function count_occupied(st: Grid): number
     return r
 end
 
-local function find_fix_point(st: Grid, counter: SeatCounter, min_seats: number): Grid
-    local mod : number
+local function find_fix_point(st: Grid, counter: SeatCounter, min_seats: integer): Grid
+    local mod : integer
     while true do
         st, mod = step(st, counter, min_seats)
         if mod == 0 then break end
@@ -69,7 +69,7 @@ local function find_fix_point(st: Grid, counter: SeatCounter, min_seats: number)
     return st
 end
 
-function M.process(counter: SeatCounter, min_seats: number): number
+function M.process(counter: SeatCounter, min_seats: integer): integer
     return count_occupied(find_fix_point(parse_input(), counter, min_seats))
 end
 

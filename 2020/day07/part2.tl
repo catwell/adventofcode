@@ -1,8 +1,8 @@
 local common = require "common"
 
 local g = common.parse_input()
-local counts : {common.Color:number} = {}
-local function get_count(color: common.Color): number
+local counts : {common.Color:integer} = {}
+local function get_count(color: common.Color): integer
     if counts[color] then
         return counts[color]
     end

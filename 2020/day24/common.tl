@@ -12,7 +12,7 @@ end
 local M = {}
 
 -- we use odd-r layout, see https://www.redblobgames.com/grids/hexagons/
-local direction : {string: {Direction: {number}}} = {
+local direction : {string: {Direction: {integer}}} = {
     even = {
         e =  { 1,  0},
         w =  {-1,  0},
@@ -32,12 +32,12 @@ local direction : {string: {Direction: {number}}} = {
 }
 
 
-local function move(x: number, y: number, dir: Direction): number, number
+local function move(x: integer, y: integer, dir: Direction): integer, integer
     local off = direction[y % 2 == 0 and "even" or "odd"][dir]
     return x + off[1], y + off[2]
 end
 
-local function move_series(x: number, y: number, series: string): number, number
+local function move_series(x: integer, y: integer, series: string): integer, integer
     if series == "" then return x, y end
     local c1 = series:sub(1, 1)
     if c1 == "e" or c1 == "w" then
@@ -49,11 +49,11 @@ local function move_series(x: number, y: number, series: string): number, number
     end
 end
 
-local function make_ref(x: number, y: number): string
+local function make_ref(x: integer, y: integer): string
     return tostring(x) .. "," .. tostring(y)
 end
 
-local function parse_ref(s: string): number, number
+local function parse_ref(s: string): integer, integer
     return table.unpack(util.parse_integers(s))
 end
 

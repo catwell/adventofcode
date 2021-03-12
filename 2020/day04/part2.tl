@@ -10,7 +10,7 @@ end
 local function valid_hgt(v: string): boolean
     if not v then return false end
     local ns, unit = v:match("^(%d+)(%l+)$")
-    local n = tonumber(ns)
+    local n = math.tointeger(ns)
     if unit == "cm" then
         return (n and n >= 150 and n <= 193)
     elseif unit == "in" then

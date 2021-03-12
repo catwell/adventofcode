@@ -1,6 +1,6 @@
 local common = require "common"
 
-local function distant_occupied(st: common.Grid, row: number, col: number, stop_at: number): number
+local function distant_occupied(st: common.Grid, row: integer, col: integer, stop_at: integer): integer
     local n, c, max_row, max_col = 1, 0, #st, #st[1]
     local found = {}
     local dirs = {
