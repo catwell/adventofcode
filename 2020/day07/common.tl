@@ -27,13 +27,13 @@ local function parse_line(line: string) : Color, {BagData}
 end
 
 function M.parse_input() : DirectGraph
-    local r = {}
+    local r : DirectGraph = {}
     local lines = util.read_lines("input.txt")
     for _, line in ipairs(lines) do
         local color, data = parse_line(line)
         r[color] = data
     end
-    return r as DirectGraph -- inference bug?
+    return r
 end
 
 function M.reverse_graph(g: DirectGraph): ReverseGraph
