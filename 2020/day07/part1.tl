@@ -15,6 +15,6 @@ while c1 ~= c2 do
             end
         end
     end
-    c2 = util.count_keys(l2 as {any:any})
+    c2 = util.count_keys(l2)
 end
 print(c2 - 1)

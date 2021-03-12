@@ -98,7 +98,7 @@ local function state_determine_columns(self: State) : {string:number}
     while found do
         found = false
         for field, possibilities in pairs(possible_columns) do
-            if util.count_keys(possibilities as {any:any}) == 1 then
+            if util.count_keys(possibilities) == 1 then
                 _cleanup(possible_columns, field, (next(possibilities)))
             else
                 found = true

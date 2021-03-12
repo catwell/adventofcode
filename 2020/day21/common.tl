@@ -39,7 +39,7 @@ function M.get_allergizing_foods(entries: {Entry}): {string: string}
         for allergen, foods in pairs(m) do
             empty = false
             util.set_subtract(foods, r)
-            if util.count_keys(foods as {any: any}) == 1 then
+            if util.count_keys(foods) == 1 then
                 r[next(foods)] = allergen
                 m[allergen] = nil
             end
