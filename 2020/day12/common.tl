@@ -29,10 +29,10 @@ local M = {
 }
 
 local function parse_line(l: string) : Move
-    local ins, arg = l:match("^([NSEWLRF])(%d+)$")
+    local ins, argv = l:match("^([NSEWLRF])(%d+)$")
     return {
         ins = ins as Instruction,
-        arg = tonumber(arg),
+        arg = tonumber(argv),
     }
 end
 
