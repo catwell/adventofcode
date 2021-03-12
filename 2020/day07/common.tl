@@ -33,7 +33,7 @@ function M.parse_input() : DirectGraph
         local color, data = parse_line(line)
         r[color] = data
     end
-    return r
+    return r as DirectGraph -- inference bug?
 end
 
 function M.reverse_graph(g: DirectGraph): ReverseGraph
