@@ -1,8 +1,4 @@
-# AoC 2020
-
-## Notes
-
-Let's do it in [Teal](https://github.com/teal-language/tl), because it's more fun.
+# AoC 2021
 
 ## How to run
 
