@@ -1,4 +1,6 @@
-local M = {}
+local matrix = require "util.matrix"
+
+local M = {matrix = matrix}
 
 function M.read_file(path: string) : string
     local f = assert(io.open(path, "rb"))
