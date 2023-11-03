@@ -2,7 +2,7 @@
 
 die () { >&2 echo "$@"; exit 1 ; }
 
-[ -z "$TL_BIN_PATH" ] && die "You must set $TL_BIN_PATH."
+[ -z "$TL_BIN_PATH" ] && die "You must set \$TL_BIN_PATH."
 
 path="$(dirname "$0")"
 lua="$path/.lua/bin/lua"

@@ -28,7 +28,7 @@ local function parse_input() : State
             local direction, value = line:match("^fold along ([xy])=(%d+)$")
             if value then
                 local ins = {
-                    direction = direction,
+                    direction = direction as Axis,
                     value = math.tointeger(value),
                 }
                 table.insert(instructions, ins)

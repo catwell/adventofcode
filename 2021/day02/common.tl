@@ -18,8 +18,8 @@ local function parse_line(line: string) : Move
     local direction, units = string.match(line, ptrn)
     assert(units)
     return {
-        direction = direction,
-        units = units,
+        direction = direction as Direction,
+        units = math.tointeger(units),
     }
 end
 
