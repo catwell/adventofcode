@@ -13,8 +13,7 @@ fn part1_score(line: []const u8) u16 {
     return 10 * (c1 - '0') + (c2 - '0');
 }
 
-const Assoc = struct { s: []const u8, d: u8 };
-const lits = [_]Assoc{
+const lits = [_](struct { s: []const u8, d: u8 }){
     .{ .s = "0", .d = 0 },
     .{ .s = "1", .d = 1 },
     .{ .s = "2", .d = 2 },
@@ -35,6 +34,17 @@ const lits = [_]Assoc{
     .{ .s = "seven", .d = 7 },
     .{ .s = "eight", .d = 8 },
     .{ .s = "nine", .d = 9 },
+};
+
+const rev_lits = init_rev_lits: {
+    var r: [20](struct { s: [16:0]u8, d: u8 }) = undefined;
+    inline for (lits, 0..) |v, i| {
+        r[i] = .{ .s = undefined, .d = v.d };
+        @memset(&r[i].s, 0);
+        @memcpy(r[i].s[0..v.s.len], v.s);
+        std.mem.reverse(u8, &r[i].s);
+    }
+    break :init_rev_lits r;
 };
 
 fn part2_score(line: []const u8) u16 {
@@ -58,13 +68,9 @@ fn part2_score(line: []const u8) u16 {
     var rev_line = std.mem.span(@as([*:0]u8, @ptrCast(&rev_line_mem)));
     std.mem.reverse(u8, rev_line);
 
-    var rev_s_mem: [16]u8 = undefined;
-    for (lits) |v| {
-        @memset(&rev_s_mem, 0);
-        @memcpy(rev_s_mem[0..v.s.len], v.s);
-        var rev_s = std.mem.span(@as([*:0]u8, @ptrCast(&rev_s_mem)));
-        std.mem.reverse(u8, rev_s);
-        var p = std.mem.indexOf(u8, rev_line, rev_s);
+    for (rev_lits) |v| {
+        const needle = std.mem.span(@as([*:0]u8, @constCast(&v.s)));
+        var p = std.mem.indexOf(u8, rev_line, needle);
         if (p != null and p.? < p2) {
             p2 = p.?;
             v2 = v.d;
