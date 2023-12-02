@@ -81,7 +81,7 @@ fn part2_score(line: []const u8) u16 {
 }
 
 pub fn main() !void {
-    var file = try std.fs.cwd().openFile("part1.txt", .{});
+    var file = try std.fs.cwd().openFile("input.txt", .{});
     defer file.close();
 
     var buf_reader = std.io.bufferedReader(file.reader());
