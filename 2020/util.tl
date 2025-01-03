@@ -38,7 +38,7 @@ function M.count_keys(t : {any:any}) : integer
     return c
 end
 
-function M.parse_integers(s: string, i0: integer) : {integer}
+function M.parse_integers(s: string, i0?: integer) : {integer}
     local t, p = {}, i0 or 1
     local function f(x: string)
         t[p] = math.tointeger(x)
