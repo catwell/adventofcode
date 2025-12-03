@@ -48,6 +48,15 @@ function M.parse_integers(s: string, i0?: integer) : {integer}
     return t
 end
 
+function M.parse_digits(s: string) : {integer}
+    local t = {}
+    local function f(x: string)
+        t[#t+1] = math.tointeger(x)
+    end
+    s:gsub("%d", f)
+    return t
+end
+
 function M.map<A,B>(t: {A}, f: function(A):(B)): {B}
     local r = {}
     for i, v in ipairs(t) do
