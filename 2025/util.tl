@@ -129,4 +129,13 @@ function M.product(t: {integer}): integer
     return r
 end
 
+function M.max(t: {integer}): integer
+    local r = t[1]
+    assert(r)
+    for _, v in ipairs(t) do
+        if v > r then r = v end
+    end
+    return r
+end
+
 return M
