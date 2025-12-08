@@ -111,6 +111,14 @@ function M.set_intersect<K,V,W>(s1: {K:V}, s2: {K:W})
     end
 end
 
+function M.set_size(s:{any:any}): integer
+    local r = 0
+    for _ in pairs(s) do
+        r = r + 1
+    end
+    return r
+end
+
 function M.set_sum(s: {integer:any}): integer
     local r = 0
     for k in pairs(s) do r = r + k end
