@@ -1,4 +1,5 @@
 local util = require "util"
+local ilp_solver = require "ilp_solver"
 
 local M = {}
 
@@ -58,50 +59,22 @@ local function num_presses_1(machine: Machine): integer
 end
 
 local function num_presses_2(machine: Machine): integer
-    -- This works for the example but it is extremely slow.
-    -- Instead probably better to solve the linear system?
-    -- e.g. (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}
-    -- 3 = e + f
-    -- 5 = b + f
-    -- 4 = c + d + e
-    -- 7 = a + b + d
-    -- However this is *integer* linear programming and I
-    -- do not know a library for this in Lua...
-    local s0 = {}
-    for i = 1, machine.num_lights do s0[i] = 0 end
-    local s: {{integer}} = {s0}
-    local k = 0
-    while true do
-        k = k + 1
-        assert(k < 255)
-        local new_s, new_ss = {}, {}
-        for _, x in ipairs(s) do
-            for _, v in ipairs(machine.switches) do
-                local y = util.copy_table(x)
-                local skip, equal = false, true
-                for p = 1, machine.num_lights do
-                    y[p] = y[p] + ((v & (1 << (p - 1))) >> (p - 1))
-                    if y[p] > machine.joltages[p] then
-                        skip = true
-                    elseif y[p] <  machine.joltages[p] then
-                        equal = false
-                    end
-                end
-                if equal then return k end
-                local repr = table.concat(y as {number}, ",")
-                if (not skip) and (not new_ss[repr]) then
-                    new_s[#new_s + 1] = y
-                    new_ss[repr] = true
-                end
-            end
+    local a = {}
+    for i = 1, machine.num_lights do
+        local t = {}
+        for j, v in ipairs(machine.switches) do
+            t[j] = ((v & (1 << (i - 1))) >> (i - 1))
         end
-        s = new_s
+        a[i] = t
     end
+    local solver = ilp_solver.new(a, machine.joltages)
+    solver.search_limit = util.max(machine.joltages)
+    local _, cost = solver:solve()
+    return math.tointeger(cost)
 end
 
 function M.run(input_fn: string, part: integer) : integer
     local machines = parse_input(input_fn)
-    if input_fn == "input.txt" and part == 2 then return 0 end
     return util.sum(util.map(machines, part == 1 and num_presses_1 or num_presses_2))
 end
 
