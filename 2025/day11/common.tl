@@ -33,77 +33,49 @@ local function count_paths_1(wires: {string: {string}}): integer
 end
 
 local function count_paths_2(wires: {string: {string}}): integer
-    local cur_paths: {string: integer} = {svr = 1}
-    local cur_fft: {string: integer} = {}
-    local cur_dac: {string: integer} = {}
-    local cur_both: {string: integer} = {}
+    local cur_paths: {string: {string: integer}} = {
+        none = {svr = 1},
+        fft = {},
+        dac = {},
+        both = {},
+    }
     local over = false
     local total_you = 0
+    local next_k: {string: {string: string}} = {
+        none = {
+            fft = "fft",
+            dac = "dac",
+        },
+        fft = { dac = "both"},
+        dac = { fft = "both"},
+        both = {},
+    }
     while not over do
-        local next_paths: {string: integer} = {}
-        local next_fft: {string: integer} = {}
-        local next_dac: {string: integer} = {}
-        local next_both: {string: integer} = {}
+        local next_paths: {string: {string: integer}} = {
+            none = {},
+            fft = {},
+            dac = {},
+            both = {},
+        }
         over = true
-        for k, v in pairs(cur_paths) do
-            if wires[k] then
-                over = false
-                for _, k2 in ipairs(wires[k]) do
-                    local next_t = next_paths
-                    if k2 == "fft" then
-                        next_t = next_fft
-                    elseif k2 == "dac" then
-                        next_t = next_dac
+        for part, paths in pairs(cur_paths) do
+            for k, v in pairs(paths) do
+                if wires[k] then
+                    over = false
+                    for _, k2 in ipairs(wires[k]) do
+                        local next_part = next_k[part][k2] or part
+                        local next_t = next_paths[next_part]
+                        next_t[k2] = (next_t[k2] or 0) + v
                     end
-                    next_t[k2] = (next_t[k2] or 0) + v
-                end
-            else
-                assert(k == "out")
-            end
-        end
-        for k, v in pairs(cur_fft) do
-            if wires[k] then
-                over = false
-                for _, k2 in ipairs(wires[k]) do
-                    local next_t = next_fft
-                    if  k2 == "dac" then
-                        next_t = next_both
+                else
+                    assert(k == "out")
+                    if part == "both" then
+                        total_you = total_you + v
                     end
-                    next_t[k2] = (next_t[k2] or 0) + v
                 end
-            else
-                assert(k == "out")
-            end
-        end
-        for k, v in pairs(cur_dac) do
-            if wires[k] then
-                over = false
-                for _, k2 in ipairs(wires[k]) do
-                    local next_t = next_dac
-                    if  k2 == "fft" then
-                        next_t = next_both
-                    end
-                    next_t[k2] = (next_t[k2] or 0) + v
-                end
-            else
-                assert(k == "out")
-                -- total_you = total_you + v
-            end
-        end
-        for k, v in pairs(cur_both) do
-            if wires[k] then
-                for _, k2 in ipairs(wires[k]) do
-                    next_both[k2] = (next_both[k2] or 0) + v
-                end
-            else
-                assert(k == "out")
-                total_you = total_you + v
             end
         end
         cur_paths = next_paths
-        cur_fft = next_fft
-        cur_dac = next_dac
-        cur_both = next_both
     end
     return total_you
 end
