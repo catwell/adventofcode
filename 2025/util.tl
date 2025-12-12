@@ -95,6 +95,18 @@ function M.to_set<A>(t: {A}): {A: boolean}
     return r
 end
 
+function M.set_keys<A>(s: {A:any}): {A}
+    local r = {}
+    for k in pairs(s) do r[#r+1] = k end
+    return r
+end
+
+function M.set_values<A>(s: {any:A}): {A}
+    local r = {}
+    for _, v in pairs(s) do r[#r+1] = v end
+    return r
+end
+
 function M.set_add<K,V>(s1: {K:V}, s2: {K:V})
     for k, v in pairs(s2) do
         s1[k] = s1[k] or v
