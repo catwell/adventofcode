@@ -7,8 +7,8 @@ I use [localua](https://github.com/oploadk/localua) and a local version of `tl` 
 ```bash
 curl https://loadk.com/localua.sh -O
 sh localua.sh .lua
-./.lua/bin/luarocks install tl --only-deps
-./.lua/bin/luarocks install luafilesystem
+# use rockspec because deps can be different from prod
+./.lua/bin/luarocks install ../../tl/tl-dev-1.rockspec --only-deps
 ```
 
 ## Getting started
