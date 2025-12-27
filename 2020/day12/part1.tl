@@ -1,17 +1,14 @@
 local common = require "common"
 
-local Instruction = common.Instruction
-local Direction = common.Direction
-local Move = common.Move
 
 local record Ship
     x: integer
     y: integer
-    dir: Direction
-    move: function(Ship, Move)
+    dir: common.Direction
+    move: function(Ship, common.Move)
 end
 
-local function ship_move(self: Ship, move: Move)
+local function ship_move(self: Ship, move: common.Move)
     if move.ins == "N" then
          self.y = self.y + move.arg
     elseif move.ins == "S" then
@@ -33,7 +30,7 @@ local function ship_move(self: Ship, move: Move)
     else
         assert(move.ins == "F")
         self:move({
-            ins = self.dir as Instruction,
+            ins = self.dir as common.Instruction,
             arg = move.arg,
         })
     end

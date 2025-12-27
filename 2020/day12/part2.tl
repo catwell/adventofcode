@@ -1,21 +1,19 @@
 local common = require "common"
 
-local Move = common.Move
-
 local record Waypoint
     x: integer
     y: integer
-    move: function(Waypoint, Move)
+    move: function(Waypoint, common.Move)
 end
 
 local record Ship
     x: integer
     y: integer
     wp: Waypoint
-    move: function(Ship, Move)
+    move: function(Ship, common.Move)
 end
 
-local function waypoint_move(self: Waypoint, move: Move)
+local function waypoint_move(self: Waypoint, move: common.Move)
     if move.ins == "N" then
          self.y = self.y + move.arg
     elseif move.ins == "S" then
@@ -41,7 +39,7 @@ local function new_waypoint(): Waypoint
     return setmetatable({x = 10, y = 1}, waypoint_mt)
 end
 
-local function ship_move(self: Ship, move: Move)
+local function ship_move(self: Ship, move: common.Move)
     if move.ins == "F" then
         for _ = 1, move.arg do
             self.x = self.x + self.wp.x
